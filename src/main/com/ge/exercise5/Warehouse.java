@@ -27,9 +27,15 @@ public class Warehouse {
                 if (item.getValue() > 0) {
                     if (item.getType() == NORMAL) {
                         item.setValue(item.getValue() - 1);
+                    } else if (item.getType() == PERISHABLE) {
+                    	if (item.getValue() >= 2) {
+                    		item.setValue(item.getValue() - 2);
+                    	} else {
+                    		item.setValue(0);
+                    	}
                     }
                 }
-            } else if (item.getType() != NORMAL && item.getType() != AGEABLE && item.getType() != RARE) {
+            } else if (item.getType() != NORMAL && item.getType() != AGEABLE && item.getType() != RARE && item.getType() != PERISHABLE ) {
                 if (item.getValue() > 0) {
                     item.setValue(item.getValue() - 1);
                 }
@@ -52,7 +58,13 @@ public class Warehouse {
             if (item.getSellBy() < 0) {
                 if (item.getType() != AGEABLE) {
                     if (item.getType() != RARE) {
-                        if (item.getValue() > 0) {
+                    	if (item.getType() == PERISHABLE) {
+                    		if (item.getValue() >= 2) {
+                    			item.setValue(item.getValue() - 2);
+                    		} else {
+                    			item.setValue(0);
+                    		}
+                    	} else if (item.getValue() > 0) {
                             if (item.getType() != PRECIOUS) {
                                 item.setValue(item.getValue() - 1);
                             }
