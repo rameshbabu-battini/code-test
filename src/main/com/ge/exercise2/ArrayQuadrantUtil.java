@@ -24,7 +24,7 @@ public class ArrayQuadrantUtil<T> {
 
 	@SuppressWarnings("unchecked")
 	public T[] getQuadrantValues(int row, int column, int partitionSize) {
-		if (data != null) {
+		if (data != null && ((rowSize - row) >= partitionSize) && ((columnSize - column) >= partitionSize)) {
 			for (int i = 0; i < rowSize; i++) {
 				for (int j = 0; j < columnSize; j++) {
 					if (i == row && j == column) {
