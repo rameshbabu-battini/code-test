@@ -1,6 +1,7 @@
 package com.ge.exercise2;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Assume;
 import org.junit.Test;
@@ -56,7 +57,7 @@ public class ArrayQuadrantUtilTest {
     }
     
     @Test
-    public void getQuadrantValuesTest2() {
+    public void getQuadrantValuesWithPartitionSize2Test() {
         Integer[][] data = {
                 {1, 2, 3, 4},
                 {5, 6, 7, 8},
@@ -69,6 +70,39 @@ public class ArrayQuadrantUtilTest {
 
         Integer[] expectedResult = {6, 7, 10, 11};
         assertArrayEquals(expectedResult, util.getQuadrantValues(1, 1, 2));
+    }
+    
+    @Test
+    public void getQuadrantValuesWithParitionSize3Test() {
+        Integer[][] data = {
+                {1, 2, 3, 4, 5, 6},
+                {7, 8, 9, 10, 11, 12},
+                {13, 14, 15, 16, 17, 18},
+                {19, 20, 21, 22, 23, 24},
+                {25, 26, 27, 28, 29, 30},
+                {31, 32, 33, 34, 35, 36}
+        };
+
+        ArrayQuadrantUtil<Integer> util = new ArrayQuadrantUtil<>(data);
+        Assume.assumeNotNull((Object[])util.getQuadrantValues(3, 2, 3));
+
+        Integer[] expectedResult = {21, 22, 23, 27, 28, 29, 33, 34, 35};
+        assertArrayEquals(expectedResult, util.getQuadrantValues(3, 2, 3));
+    }
+    
+    @Test
+    public void getQuadrantValuesWithInvalidParitionSizeTest() {
+        Integer[][] data = {
+                {1, 2, 3, 4, 5, 6},
+                {7, 8, 9, 10, 11, 12},
+                {13, 14, 15, 16, 17, 18},
+                {19, 20, 21, 22, 23, 24},
+                {25, 26, 27, 28, 29, 30},
+                {31, 32, 33, 34, 35, 36}
+        };
+
+        ArrayQuadrantUtil<Integer> util = new ArrayQuadrantUtil<>(data);
+        assertNull((Object[])util.getQuadrantValues(4, 2, 3));
     }
     
 }
